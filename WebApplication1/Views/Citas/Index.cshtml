@@ -1,0 +1,87 @@
+﻿@model IEnumerable<WebApplication1.Models.Cita>
+
+@{
+    ViewData["Title"] = "Citas";
+}
+
+
+<h1>Citas</h1>
+
+<div class="container">
+    <a asp-action="Create" class="btn btn-outline-primary">Crear Nueva Cita</a>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaHoraCreacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaHoraCita)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Motivo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreadoPor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DuiNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaHoraCreacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaHoraCita)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Motivo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreadoPor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Precio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DuiNavigation.Dui)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.NumCita" class="btn btn-outline-primary">
+                        <i class="fas fa-edit"></i> Editar
+                    </a> 
+                    <a asp-action="Details" asp-route-id="@item.NumCita" class="btn btn-outline-warning">
+                        <i class="fas fa-info-circle"></i> Detalles
+                    </a> 
+                    <a asp-action="Delete" asp-route-id="@item.NumCita" class="btn btn-outline-danger">
+                        <i class="fas fa-trash-alt"></i> Eliminar
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="container">
+    <form asp-action="DescargarPDFCitas" asp-controller="Citas">
+        <div class="form-group">
+            <label for="fechaInicio">Fecha de Inicio:</label>
+            <input type="date" id="fechaInicio" name="fechaInicio" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="fechaFin">Fecha de Fin:</label>
+            <input type="date" id="fechaFin" name="fechaFin" class="form-control" required>
+        </div>
+        <button class="btn btn-outline-success" type="submit">Descargar Reporte de Citas</button>
+    </form>
+</div>

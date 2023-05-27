@@ -1,0 +1,87 @@
+﻿@model IEnumerable<WebApplication1.Models.Paciente>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>PAcientes</h1>
+
+<div class="container">
+    <a asp-action="Create" class="btn btn-outline-primary">Crear Nueva Cita</a>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NombrePaciente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApellidosPaciente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SexoPaciente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TelefonoPaciente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DireccionPaciente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstadoCivil)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaNacimiento)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombrePaciente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApellidosPaciente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SexoPaciente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TelefonoPaciente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DireccionPaciente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstadoCivil)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaNacimiento)
+            </td>
+            <td>
+                    <a asp-action="Edit" asp-route-id="@item.Dui" class="btn btn-outline-primary">
+                        <i class="fas fa-edit"></i> Editar
+                </a> 
+                    <a asp-action="Details" asp-route-id="@item.Dui" class="btn btn-outline-primary">
+                        <i class="fas fa-info-circle"></i> Detalles
+                </a> 
+                    <a asp-action="Delete" asp-route-id="@item.Dui" class="btn btn-outline-primary">
+                        <i class="fas fa-trash-alt"></i> Eliminar
+                </a>
+                    <a asp-action="DescargarPDFExpediente" asp-route-id="@item.Dui" class="btn btn-outline-primary">
+                        <i class="fas fa-file-pdf"></i> Descargar PDF
+                </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<div class="container">
+    <form asp-action="DescargarPDFPacientes" asp-controller="Pacientes">
+        <button class="btn btn-outline-success" type="submit">Descargar Reporte de Pacientes</button>
+    </form>
+</div>
+
